@@ -1,27 +1,39 @@
+<!-- action = when hit summit it uses actio  URL -->
+<!-- Method = POST (to send data) -->
+<!-- name attribute = to fetch value -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Login Form</title>
-  <!-- Custom CSS File -->
-  <link rel="stylesheet" href="./css/style.css" />
-</head>
-<body>
-  <div class="container">
-    <div class="login form">
-      <header>Login</header>
-      <form action="/login" method="POST">
-        <input type="text" name="email" placeholder="Enter your email" required />
-        <input type="password" name="password" placeholder="Enter your password" required />
-        <a href="#">Forgot password?</a>
-        <input type="submit" class="button" value="Login" />
-      </form>
-      <div class="signup">
-        <span>Don't have an account? <a href="signup.html">Signup</a></span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Login Form</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="login form">
+        <header>Login</header>
+        <form action="/api/auth/login" method="POST">
+          <input
+            type="text"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+          />
+          <a href="#">Forgot password?</a>
+          <input type="submit" class="button" value="Login" />
+        </form>
+        <div class="signup">
+          <span>Don't have an account? <a href="signup.html">Signup</a></span>
+        </div>
       </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>
