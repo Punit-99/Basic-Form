@@ -1,21 +1,22 @@
-// starting of backend (main file)
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const dotenv = require("dotenv");
 const path = require("path");
+const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/auth");
-
-dotenv.config();
+const authenticateToken = require("./middleware/auth");
+const env = require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cookieParser());
 
-mongoose.connect(process.env.MONGO_URI, {
+mongoose
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -28,10 +29,11 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRoutes);
 
-app.get("/dashboard", (req, res) => {
+// Protected route
+app.get("/dashboard", authenticateToken, (req, res) => {
   res.sendFile(path.join(__dirname, "public", "dashboard.html"));
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });
